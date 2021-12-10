@@ -39,6 +39,12 @@ jobs:
            $channelName = "Feature Branches"
            $deployEnvironment = "Test"           
         }
+        elseif ($branchName -eq "master" -and $commitMessage -like "*Merge pull request*")
+        { 
+          $versionNumber = "0.0.${{env.GITHUB_RUN_NUMBER}}"
+          $channelName = "Feature Branches"
+          $deployEnvironment = "Test"    
+        }
 
         Write-Host "Setting environment variable PACKAGE_VERSION to: $versionNumber"
         Write-Host "Setting environment variable BRANCH_NAME to: $branchName"
